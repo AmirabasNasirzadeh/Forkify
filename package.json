@@ -1,0 +1,29 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Food recipe application",
+  "scripts": {
+    "start": "npx parcel index.html",
+    "build": "npx parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirabasNasirzadeh/Forkify.git"
+  },
+  "type": "module",
+  "author": "Amirabas Nasirzadeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmirabasNasirzadeh/Forkify/issues"
+  },
+  "homepage": "https://github.com/AmirabasNasirzadeh/Forkify#readme",
+  "dependencies": {
+    "core-js": "^3.37.1",
+    "regenerator-runtime": "^0.14.1",
+    "sass": "^1.77.8"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "parcel": "^2.12.0"
+  }
+}
