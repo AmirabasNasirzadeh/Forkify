@@ -604,13 +604,13 @@ const controllRecipes = async function() {
         // 2) Rendering Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (error) {
-        alert(error);
+        (0, _recipeViewJsDefault.default).renderError();
     }
 };
-[
-    `load`,
-    `hashchange`
-].forEach((event)=>window.addEventListener(event, controllRecipes));
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandlerRender(controllRecipes);
+};
+init();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../img/icons.svg":"loVOp","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -2510,18 +2510,22 @@ const state = {
     recipe: {}
 };
 const loadRecipe = async function(id) {
-    const data = await (0, _helpers.getJSON)(`${(0, _config.API_URL)}/${id}`);
-    const { recipe } = data.data;
-    state.recipe = {
-        id: recipe.id,
-        title: recipe.title,
-        publisher: recipe.publisher,
-        sourceUrl: recipe.source_url,
-        image: recipe.image_url,
-        servings: recipe.servings,
-        cookingTime: recipe.cooking_time,
-        ingredients: recipe.ingredients
-    };
+    try {
+        const data = await (0, _helpers.getJSON)(`${(0, _config.API_URL)}/${id}`);
+        const { recipe } = data.data;
+        state.recipe = {
+            id: recipe.id,
+            title: recipe.title,
+            publisher: recipe.publisher,
+            sourceUrl: recipe.source_url,
+            image: recipe.image_url,
+            servings: recipe.servings,
+            cookingTime: recipe.cooking_time,
+            ingredients: recipe.ingredients
+        };
+    } catch (error) {
+        throw error;
+    }
 };
 
 },{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config":"k5Hzs","./helpers":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
@@ -2567,6 +2571,8 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class RecipeView {
     #parentEl = document.querySelector(".recipe");
     #data;
+    #errorMessage = "No recipe found! Please try again.";
+    #message;
     render(data) {
         this.#data = data;
         const html = this.#generateMarkup();
@@ -2579,7 +2585,7 @@ class RecipeView {
               <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
             </svg>
          </div>`;
-        this.#parentEl.innerHTML = "";
+        this.#clear();
         this.#parentEl.insertAdjacentHTML("afterbegin", html);
     }
     #clear() {
@@ -2671,6 +2677,36 @@ class RecipeView {
       </svg>
     </a>
   </div>`;
+    }
+    addHandlerRender(handler) {
+        [
+            `load`,
+            `hashchange`
+        ].forEach((event)=>window.addEventListener(event, handler));
+    }
+    renderError(errorMessage = this.#errorMessage) {
+        const html = `<div class="error">
+                    <div>
+                      <svg>
+                        <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle"></use>
+                      </svg>
+                    </div>
+                    <p>${errorMessage}</p>
+                  </div>`;
+        this.#clear();
+        this.#parentEl.insertAdjacentHTML("afterbegin", html);
+    }
+    renderMessage(message) {
+        const html = `<div class="message">
+                    <div>
+                      <svg>
+                        <use href="${(0, _iconsSvgDefault.default)}#icon-smile"></use>
+                      </svg>
+                    </div>
+                    <p>${message}</p>
+                  </div>`;
+        this.#clear();
+        this.#parentEl.insertAdjacentHTML("afterbegin", html);
     }
 }
 exports.default = new RecipeView();
