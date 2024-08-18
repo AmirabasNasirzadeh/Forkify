@@ -10,7 +10,7 @@ class ResultsView extends View {
 
   _generateMarkupPreview(result) {
     return `<li class="preview">
-              <a class="preview__link preview__link--active" href="#${result.id}">
+              <a class="preview__link" href="#${result.id}">
                 <figure class="preview__fig">
                   <img src="${result.image}" alt="Test" />
                 </figure>

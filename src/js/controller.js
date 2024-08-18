@@ -4,6 +4,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
 import { isWebAssemblyCompiledModule } from "util/support/types.js";
 
 if (module.hot) {
@@ -31,24 +32,38 @@ const controllRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
+    // 1) Get search query ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     const query = searchView.getQuery();
     if (!query) return;
 
     resultsView.spinner();
 
+    // 2) Loading search results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     await model.loadSearchRecipe(query);
 
-    resultsView.render(model.state.search.results);
+    // 3) Render results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
+    resultsView.render(model.getSearchResultPages(1));
+
+    // 3) Render pagination ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
+    paginationView.render(model.state.search);
   } catch (error) {
     console.log(`${error} ***`);
-    recipeView.renderError();
+    resultsView.renderError();
   }
 };
-controlSearchResults();
+
+const controllpagination = function (goToPage) {
+  // 1) Render NEW results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
+  resultsView.render(model.getSearchResultPages(goToPage));
+
+  // 2) Render NEW pagination ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
+  paginationView.render(model.state.search);
+};
 
 const init = function () {
   recipeView.addHandlerRender(controllRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerPagination(controllpagination);
 };
 
 init();
