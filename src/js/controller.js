@@ -13,7 +13,7 @@ if (module.hot) {
 
 // ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
 
-const controllRecipes = async function () {
+const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
     if (!id) return;
@@ -22,7 +22,6 @@ const controllRecipes = async function () {
 
     // 1) Loading Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     await model.loadRecipe(id);
-
     // 2) Rendering Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     recipeView.render(model.state.recipe);
   } catch (error) {
@@ -52,7 +51,7 @@ const controlSearchResults = async function () {
   }
 };
 
-const controllpagination = function (goToPage) {
+const controlpagination = function (goToPage) {
   // 1) Render NEW results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
   resultsView.render(model.getSearchResultPages(goToPage));
 
@@ -60,10 +59,19 @@ const controllpagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function (newServings) {
+  // 1) Update the recipe servings
+  model.updateServings(newServings);
+
+  // 1) Update the recipe view
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
-  recipeView.addHandlerRender(controllRecipes);
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
-  paginationView.addHandlerPagination(controllpagination);
+  paginationView.addHandlerPagination(controlpagination);
 };
 
 init();
