@@ -14,6 +14,33 @@ export default class View {
     this._parentEl.insertAdjacentHTML("beforeend", html);
   }
 
+  update(data) {
+    if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+
+    this._data = data;
+    const newMarkup = this._generateMarkup();
+
+    const newDom = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDom.querySelectorAll(`*`));
+    const currentElements = Array.from(this._parentEl.querySelectorAll(`*`));
+
+    newElements.forEach((newEl, index) => {
+      const currentEl = currentElements[index];
+
+      // Update changed text
+      if (!newEl.isEqualNode(currentEl) && newEl.firstChild?.nodeValue.trim() !== "") {
+        currentEl.textContent = newEl.textContent;
+      }
+
+      // Update changed attributes
+      if (!newEl.isEqualNode(currentEl)) {
+        Array.from(newEl.attributes).forEach((attr) => {
+          currentEl.setAttribute(attr.name, attr.value);
+        });
+      }
+    });
+  }
+
   spinner() {
     const html = `<div class="spinner">
             <svg>

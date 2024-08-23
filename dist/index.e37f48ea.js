@@ -639,7 +639,7 @@ const controlServings = function(newServings) {
     // 1) Update the recipe servings
     _modelJs.updateServings(newServings);
     // 1) Update the recipe view
-    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+    (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
 };
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
@@ -2709,7 +2709,6 @@ class RecipeView extends (0, _viewDefault.default) {
             if (!btn) return;
             const { updateTo } = btn.dataset;
             if (+updateTo > 0) handler(+updateTo);
-            console.log(updateTo);
         });
     }
 }
@@ -2768,6 +2767,23 @@ class View {
         const html = this._generateMarkup();
         this._clear();
         this._parentEl.insertAdjacentHTML("beforeend", html);
+    }
+    update(data) {
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
+        this._data = data;
+        const newMarkup = this._generateMarkup();
+        const newDom = document.createRange().createContextualFragment(newMarkup);
+        const newElements = Array.from(newDom.querySelectorAll(`*`));
+        const currentElements = Array.from(this._parentEl.querySelectorAll(`*`));
+        newElements.forEach((newEl, index)=>{
+            const currentEl = currentElements[index];
+            // Update changed text
+            if (!newEl.isEqualNode(currentEl) && newEl.firstChild?.nodeValue.trim() !== "") currentEl.textContent = newEl.textContent;
+            // Update changed attributes
+            if (!newEl.isEqualNode(currentEl)) Array.from(newEl.attributes).forEach((attr)=>{
+                currentEl.setAttribute(attr.name, attr.value);
+            });
+        });
     }
     spinner() {
         const html = `<div class="spinner">

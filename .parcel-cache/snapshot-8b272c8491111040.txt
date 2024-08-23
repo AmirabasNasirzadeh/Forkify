@@ -32,7 +32,7 @@
 107D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\modules\es.typed-array.int8-array.js133671063272977892 0
 108D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\internals\dom-token-list-prototype.js133671063263173039 0
 79D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\for-each\LICENSE133673634568470607 0
-54D:\Amirabas\CODING\JS projects\18-forkify\starter\dist133689191485049975 1
+54D:\Amirabas\CODING\JS projects\18-forkify\starter\dist133689237526959043 1
 116D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\csso\node_modules\css-tree\lib\syntax\atrule\index.js133668242228621021 0
 93D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\css-what\lib\commonjs\index.js133668242223429369 0
 70D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\timsort133668242224603833 1
@@ -208,7 +208,7 @@
 78D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\lmdb\index.d.ts133668242228339310 0
 105D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\stable\dom-collections\for-each.js133671063276358594 0
 126D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\sample-bdb.txt133668242228369308 0
-70D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\controller.js133689190509059523 0
+70D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\controller.js133689227465118414 0
 95D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\full\typed-array\sort.js133671063281995344 0
 112D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\proposals\change-array-by-copy-stage-4.js133671063243744034 0
 109D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\dom-serializer\node_modules\entities\readme.md133668242225408159 0
@@ -251,7 +251,7 @@
 68D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\chalk133668242224468666 1
 89D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\js-yaml\lib\schema\core.js133668242224258658 0
 85D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\entities\lib\generated133668242225910607 1
-70D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\views\view.js133681335764264937 0
+70D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\views\view.js133689237205229630 0
 124D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\csso\node_modules\css-tree\lib\syntax\node\DeclarationList.js133668242228419305 0
 84D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\detect-libc\README.md133668242223579437 0
 122D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\caniuse-lite\data\features\background-repeat-round-space.js133668242226911960 0
@@ -278,7 +278,7 @@
 111D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\css-select\node_modules\entities\lib\decode.d.ts133668242227069563 0
 83D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\stage\pre.js133671063280431296 0
 84D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\posthtml\package.json133668242223898572 0
-76D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\views\recipeView.js133689191481575992 0
+76D:\Amirabas\CODING\JS projects\18-forkify\starter\src\js\views\recipeView.js133689237526555869 0
 104D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\features\symbol\custom-matcher.js133671063262729876 0
 107D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\caniuse-lite\data\features\css-line-clamp.js133668242228581018 0
 105D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\core-js\modules\es.array-buffer.is-view.js133671063271273103 0
@@ -9759,7 +9759,7 @@
 139D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\config\walker.js133668242228089006 0
 139D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\import.js133668242227069563 0
 138D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\index.js133668242227250797 0
-72D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\index.e37f48ea.js133689191485049975 0
+72D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\index.e37f48ea.js133689237526959043 0
 138D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\media.js133668242227520877 0
 137D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\page.js133668242227701447 0
 141D:\Amirabas\CODING\JS projects\18-forkify\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\supports.js133668242228003956 0
@@ -10134,4 +10134,4 @@
 74D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\starter.3464ddca.js133669202178087891 0
 78D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\starter.3464ddca.js.map133669202178142972 0
 73D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\icons.dfd7a6db.svg133689191137615490 0
-76D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\index.e37f48ea.js.map133689191485049975 0
+76D:\Amirabas\CODING\JS projects\18-forkify\starter\dist\index.e37f48ea.js.map133689237526959043 0
