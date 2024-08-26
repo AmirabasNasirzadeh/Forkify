@@ -6,6 +6,7 @@ import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
 import { isWebAssemblyCompiledModule } from "util/support/types.js";
+import View from "./views/view.js";
 
 if (module.hot) {
   module.hot.accept();
@@ -19,6 +20,9 @@ const controlRecipes = async function () {
     if (!id) return;
 
     recipeView.spinner();
+
+    // 0) Update results to mark selected search result ~~●~~●~~●~~●~~●~~●~~●~~●~~
+    resultsView.update(model.getSearchResultPages());
 
     // 1) Loading Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     await model.loadRecipe(id);
@@ -41,7 +45,7 @@ const controlSearchResults = async function () {
     await model.loadSearchRecipe(query);
 
     // 3) Render results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
-    resultsView.render(model.getSearchResultPages(1));
+    resultsView.render(model.getSearchResultPages());
 
     // 3) Render pagination ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
     paginationView.render(model.state.search);

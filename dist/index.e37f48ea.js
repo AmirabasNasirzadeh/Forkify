@@ -597,6 +597,8 @@ var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _typesJs = require("util/support/types.js");
+var _viewJs = require("./views/view.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 if (module.hot) module.hot.accept();
 // ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
 const controlRecipes = async function() {
@@ -604,6 +606,8 @@ const controlRecipes = async function() {
         const id = window.location.hash.slice(1);
         if (!id) return;
         (0, _recipeViewJsDefault.default).spinner();
+        // 0) Update results to mark selected search result ~~●~~●~~●~~●~~●~~●~~●~~●~~
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultPages());
         // 1) Loading Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
         await _modelJs.loadRecipe(id);
         // 2) Rendering Recipe ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
@@ -621,7 +625,7 @@ const controlSearchResults = async function() {
         // 2) Loading search results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
         await _modelJs.loadSearchRecipe(query);
         // 3) Render results ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
-        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultPages(1));
+        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultPages());
         // 3) Render pagination ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
         (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (error) {
@@ -649,7 +653,7 @@ const init = function() {
 };
 init();
 
-},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","util/support/types.js":"bnQvf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","util/support/types.js":"bnQvf","./views/view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 "use strict";
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("52e9b3eefbbce1ed");
@@ -1898,7 +1902,7 @@ const state = {
     search: {
         query: ``,
         results: [],
-        page: ``,
+        page: 1,
         resultsPerPage: (0, _config.RESULTS_PER_PAGE)
     }
 };
@@ -1938,7 +1942,7 @@ const loadSearchRecipe = async function(query) {
         throw error;
     }
 };
-const getSearchResultPages = function(page) {
+const getSearchResultPages = function(page = state.search.page) {
     state.search.page = page;
     const start = (page - 1) * state.search.resultsPerPage;
     const end = page * state.search.resultsPerPage;
@@ -2769,7 +2773,6 @@ class View {
         this._parentEl.insertAdjacentHTML("beforeend", html);
     }
     update(data) {
-        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const newMarkup = this._generateMarkup();
         const newDom = document.createRange().createContextualFragment(newMarkup);
@@ -2861,8 +2864,9 @@ class ResultsView extends (0, _viewDefault.default) {
         return this._data.map(this._generateMarkupPreview).join(``);
     }
     _generateMarkupPreview(result) {
+        const id = window.location.hash.slice(1);
         return `<li class="preview">
-              <a class="preview__link" href="#${result.id}">
+              <a class="preview__link ${result.id === id ? `preview__link--active` : ``}" href="#${result.id}">
                 <figure class="preview__fig">
                   <img src="${result.image}" alt="Test" />
                 </figure>
