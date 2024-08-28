@@ -5,11 +5,14 @@ export default class View {
   _errorMessage = "Couldn't find any recipe! Please try again.";
   _message;
 
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
 
     this._data = data;
     const html = this._generateMarkup();
+
+    if (!render) return html;
+
     this._clear();
     this._parentEl.insertAdjacentHTML("beforeend", html);
   }
