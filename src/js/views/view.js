@@ -70,7 +70,7 @@ export default class View {
     this._parentEl.insertAdjacentHTML("afterbegin", html);
   }
 
-  renderMessage(message) {
+  renderMessage(message = this._message) {
     const html = `<div class="message">
                     <div>
                       <svg>
