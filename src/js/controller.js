@@ -12,10 +12,6 @@ import { isWebAssemblyCompiledModule } from "util/support/types.js";
 import View from "./views/view.js";
 import { async } from "regenerator-runtime";
 
-if (module.hot) {
-  module.hot.accept();
-}
-
 // ~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~●~~
 
 const controlRecipes = async function () {
